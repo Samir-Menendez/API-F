@@ -32,7 +32,7 @@ Una vez replicado todo, se puede ejecutar y mandar datos de prueba "10" y "coca 
 
 **http://LA_IP_DE_DONDE_SE_ESTA_EJECUTANDO_EL_MAIN.PY:8000/ver-gastos** (Aquí verificamos los datos ya subidos )
 
-# Parte 2
+# DATOS MOVILES
 
 Reemplazamos el url anterior con lo que nos dio de resultado en el forwarding
 
@@ -45,4 +45,28 @@ Desde el momento que le damos a ejecutar en el cmd debe aparacer que hay 1 conex
 <div align="center">
   <img src="images/GuiaAtajo/1768182352648.png" alt="5" width="400">
 </div>
+
+# SEGURIDAD
+
+En el archivo main.py en sección
+![1768183906074](images/GuiaAtajo/1768183906074.png)
+guardamos esa contraseña y es la que ponemos al crear un nuevo header
+
+| CLAVE        | VALOR            |
+| ------------ | ---------------- |
+| x-token | contraseña |
+
+<div align="center">
+  <img src="images/GuiaAtajo/1768183699362.png" alt="5" width="200">
+</div>
+
+En caso de que otro usuario quiera ingresar datos y no tenga ese token lo que le va a salir es lo siguiente
+
+<div align="center">
+  <img src="images/GuiaAtajo/1768184024641.png" alt="5" width="200">
+</div>
+
+y en el cmd tanto como en el main.py y ngrok aparecera la advertencia
+![1768184090536](images/GuiaAtajo/1768184090536.png)
+![1768184112593](images/GuiaAtajo/1768184112593.png)
 

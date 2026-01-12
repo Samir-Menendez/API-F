@@ -24,7 +24,34 @@ Luego para activar el servidor
 
 ![1768177118672](images/GuiaBackend/1768177118672.png)
 
+**RECORDATORIO**
+
+Para activar la base de datos se debe hacer en un entorno venv
+
+* .\venv\Scripts\activate
+* uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
 Con la información de Forwarding tendremos el url para enviar los datos a la base de datos
 
-[IMPLEMENTAR LO ANTERIOR A LA APP DE ATAJO](GuiaAtajo.md#parte-2)
+[IMPLEMENTAR LO ANTERIOR A LA APP DE ATAJO](GuiaAtajo.md#datos-moviles)
+
+# SEGURIDAD
+
+Para aplicar seguridad al sistema de tal manera evitar que cualquier pueda ingresar datos falsos porque se sabe el URL del ngrok (como el codigo ya está listo solo falta explicar el resto)
+
+[IMPLEMENTAR SEGURIDAD A LA APP DE ATAJO](GuiaAtajo.md#seguridad)
+
+# GRAFICO
+
+LIBRERIA NECESARIA:
+
+* pip install pandas matplotlib
+
+Esta relacionado con analisis.py
+
+# AUTOMATIZACION
+
+Necesitamos crear un .bat pero tiene variación por la ruta del archivo dependiendo de la pc
+
+cd "C:\\Users\\Sam1R\\Desktop\\mi\_finanzas"
 
