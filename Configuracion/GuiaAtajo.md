@@ -49,7 +49,11 @@ Desde el momento que le damos a ejecutar en el cmd debe aparacer que hay 1 conex
 # SEGURIDAD
 
 En el archivo main.py en sección
-![1768183906074](images/GuiaAtajo/1768183906074.png)
+
+<div align="center">
+  <img src="images/GuiaAtajo/1768183906074.png" alt="6" width="400">
+</div>
+
 guardamos esa contraseña y es la que ponemos al crear un nuevo header
 
 | CLAVE        | VALOR            |
@@ -57,16 +61,28 @@ guardamos esa contraseña y es la que ponemos al crear un nuevo header
 | x-token | contraseña |
 
 <div align="center">
-  <img src="images/GuiaAtajo/1768183699362.png" alt="5" width="200">
+  <img src="images/GuiaAtajo/1768183699362.png" alt="7" width="200">
 </div>
 
 En caso de que otro usuario quiera ingresar datos y no tenga ese token lo que le va a salir es lo siguiente
 
 <div align="center">
-  <img src="images/GuiaAtajo/1768184024641.png" alt="5" width="200">
+  <img src="images/GuiaAtajo/1768184024641.png" alt="8" width="200">
 </div>
 
 y en el cmd tanto como en el main.py y ngrok aparecera la advertencia
 ![1768184090536](images/GuiaAtajo/1768184090536.png)
 ![1768184112593](images/GuiaAtajo/1768184112593.png)
+
+# INGRESO
+
+* Al inicio se debe ingresar una "Lista" en el cual se debe poner dos opciones "Gasto" e "Ingreso"
+ Siguiente un "Seleccionar de la lista" y se lo coloca debajo de la Lista para que conecte
+
+<div align="center">
+  <img src="images/GuiaAtajo/1768190847726.png" alt="9" width="200">
+</div>
+
+Y por ultimo se crea un cuerpo con nombre "tipo" y se le coloca la el "Seleccionar de la lista"
+
 

@@ -35,6 +35,8 @@ Con la información de Forwarding tendremos el url para enviar los datos a la ba
 
 [IMPLEMENTAR LO ANTERIOR A LA APP DE ATAJO](GuiaAtajo.md#datos-moviles)
 
+# PARTE 2
+
 # SEGURIDAD
 
 Para aplicar seguridad al sistema de tal manera evitar que cualquier pueda ingresar datos falsos porque se sabe el URL del ngrok (como el codigo ya está listo solo falta explicar el resto)
@@ -54,4 +56,19 @@ Esta relacionado con analisis.py
 Necesitamos crear un .bat pero tiene variación por la ruta del archivo dependiendo de la pc
 
 cd "C:\\Users\\Sam1R\\Desktop\\mi\_finanzas"
+
+el resto es lo mismo, el archivo esta en la carpeta INICIAR SISTEMA.bat
+
+# PARTE 3
+
+# INGRESO DE DINERO
+
+Se realizó la creación de actualizar_db.py para actualizar la tabla de la base de datos para el ingreso de dinero
+
+Luego se modifico el main.py para que acepte estos mismos datos
+
+Ahora la configuración del atajo
+
+[AHORA LA CONFIGURACION DEL ATAJO](GuiaAtajo.md#ingreso)
+
 
