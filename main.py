@@ -1,30 +1,33 @@
 import sqlite3
-from contextlib import asynccontextmanager # <--- 1. NUEVO IMPORT
+import os
+from contextlib import asynccontextmanager 
 from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel
 from datetime import datetime
+from dotenv import load_dotenv
 
-# --- CONFIGURACIÓN ---
-MI_TOKEN_SECRETO = "251003"
+load_dotenv()
 
-# --- MODELO DE DATOS ---
+# Configuración principal
+MI_TOKEN_SECRETO = os.getenv("MY_API_TOKEN", "TOKEN_NO_CONFIGURADO")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.getenv("DB_PATH", os.path.join(BASE_DIR, "finanzas.db"))
+
 class Transaccion(BaseModel):
     monto: float
     categoria: str
     nota: str = None
     tipo: str 
 
-# --- CONEXIÓN A BASE DE DATOS ---
 def get_db_connection():
-    conn = sqlite3.connect('finanzas.db')
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
-# --- 2. NUEVA LÓGICA DE INICIO (Lifespan) ---
-# Esta función reemplaza al antiguo @app.on_event("startup")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # LO QUE PASA AL ARRANCAR (STARTUP):
+    # Inicializa la tabla al arrancar
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     conn = get_db_connection()
     conn.execute('''
         CREATE TABLE IF NOT EXISTS movimientos (
@@ -38,17 +41,14 @@ async def lifespan(app: FastAPI):
     ''')
     conn.commit()
     conn.close()
-    print("🚀 Base de datos inicializada y lista.")
+    print(f"Base de datos inicializada y lista en: {DB_PATH}")
     
-    yield  # <--- Aquí es donde el servidor se queda corriendo
+    yield  
     
-    # LO QUE PASA AL APAGAR (SHUTDOWN) - Opcional:
     print("👋 Servidor apagándose...")
 
-# --- 3. INICIALIZAMOS LA APP CON LIFESPAN ---
 app = FastAPI(lifespan=lifespan)
 
-# --- ENDPOINTS (Igual que antes) ---
 @app.post("/registrar")
 async def registrar_transaccion(t: Transaccion, x_token: str = Header(None)):
     if x_token != MI_TOKEN_SECRETO:

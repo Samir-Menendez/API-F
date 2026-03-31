@@ -1,25 +1,58 @@
 @echo off
-TITLE Sistema de Finanzas y Trading 🚀
+TITLE Sistema de Finanzas
+setlocal
 
-:: 1. Entrar a la carpeta del proyecto
-cd /d "C:\Users\Sam1R\Desktop\mi_finanzas"
+:: Ir a la carpeta del proyecto
+cd /d "%~dp0"
+if errorlevel 1 goto :error
 
-:: 2. Activar el entorno virtual (si usas venv)
-call venv\Scripts\activate
+:: Crear venv si no existe
+if not exist "venv\Scripts\python.exe" (
+    echo [INFO] No se encontro venv. Creando entorno virtual...
+    py -m venv venv || goto :error_py
+)
 
-:: 3. Iniciar el Servidor (API) en una ventana aparte
-start "Cerebro (Backend)" uvicorn main:app --host 0.0.0.0 --port 8000
+:: Activar entorno
+call venv\Scripts\activate || goto :error
 
-:: 4. Esperar 3 segundos para que el servidor arranque
+:: Instalar dependencias solo si faltan paquetes clave
+if not exist "venv\Scripts\streamlit.exe" (
+    echo [INFO] Instalando dependencias: streamlit no encontrado...
+    python -m pip install --upgrade pip || goto :error
+    python -m pip install -r requirements.txt || goto :error
+)
+if not exist "venv\Scripts\uvicorn.exe" (
+    echo [INFO] Instalando dependencias: uvicorn no encontrado...
+    python -m pip install --upgrade pip || goto :error
+    python -m pip install -r requirements.txt || goto :error
+)
+
+:: Iniciar API
+start "Cerebro (Backend)" "venv\Scripts\python.exe" -m uvicorn main:app --host 0.0.0.0 --port 8000
+
+:: Esperar arranque
 timeout /t 3 /nobreak >nul
 
-:: 5. Iniciar Ngrok (Tu túnel fijo)
-:: OJO: Verifica que este sea tu dominio correcto
-start "Tunel (Ngrok)" ngrok http --domain=burt-unbleeding-nondespotically.ngrok-free.dev 8000
+:: Iniciar ngrok
+if exist "ngrok.exe" (
+    start "Tunel (Ngrok)" "ngrok.exe" http --domain=dawne-unpostulated-junko.ngrok-free.dev 8000
+) else (
+    echo [WARN] ngrok.exe no encontrado en esta carpeta. Se omite tunel.
+)
 
-:: 6. Iniciar el Dashboard (Usando Python para llamar a Streamlit)
-:: Esta es la linea clave que fallaba antes. Ahora la forzamos con python.exe
+:: Iniciar dashboard
 start "Panel Visual" "venv\Scripts\python.exe" -m streamlit run dashboard.py
 
-:: 7. Minimizar esta ventana (opcional)
-exit
+echo [OK] Servicios lanzados. Puedes cerrar esta ventana.
+timeout /t 3 >nul
+exit /b 0
+
+:error_py
+echo [ERROR] No se encontro el comando 'py'. Instala Python 3 y vuelve a ejecutar.
+pause
+exit /b 1
+
+:error
+echo [ERROR] Fallo durante el inicio. Revisa el mensaje anterior.
+pause
+exit /b 1

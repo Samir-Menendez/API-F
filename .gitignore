@@ -1,4 +1,13 @@
 venv/
+*/venv/
+/.venv/
+/.streamlit/
 __pycache__/
 *.db
-.DS_Store
+finanzas.db.backup
+*.db.*
+*.log
+.env
+.env.*
+ngrok.exe
+ngrok.yml
