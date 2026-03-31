@@ -9,5 +9,6 @@ finanzas.db.backup
 *.log
 .env
 .env.*
+!.env.example
 ngrok.exe
 ngrok.yml
